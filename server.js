@@ -23,6 +23,11 @@ app.set("layout", "./layouts/layout");
  *************************/
 app.use(static);
 
+// Index
+app.get("/", (req, res) => {
+  res.render("index", { title: "Home" });
+});
+
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
