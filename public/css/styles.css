@@ -167,7 +167,6 @@ footer {
   body {
     max-width: 800px;
     background-image: url("/images/site/small_check.jpg");
-    background-size: hidden;
     background-repeat: repeat;
   }
 
