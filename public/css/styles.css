@@ -64,6 +64,11 @@ nav ul {
   justify-content: space-around;
 }
 
+nav ul li a {
+  text-decoration: none;
+  color: var(--accent1-color);
+}
+
 #hero {
   position: relative;
 }
@@ -161,6 +166,17 @@ nav ul {
 
 footer {
   margin: 20px 0;
+}
+
+.error h1,
+h2 {
+  text-align: center;
+  font-weight: bold;
+}
+
+.error {
+  padding-top: 50px;
+  min-height: 300px;
 }
 
 @media (min-width: 800px) {
