@@ -30,6 +30,9 @@ app.use(static);
 // Index
 app.get("/", utilities.handleErrors(baseController.buildHome));
 
+// Purpose Error
+app.get("/purposeError", utilities.handleErrors(baseController.purposeError));
+
 // Inventory
 app.use("/inv", utilities.handleErrors(inventoryRoute));
 
