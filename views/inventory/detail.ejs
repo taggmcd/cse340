@@ -1,0 +1,17 @@
+<h1><%- detail.year %>
+  <%- detail.make %>
+  <%- detail.model %></h1>
+
+
+<div class="detail-card">
+  <div class="image">
+    <img src="<%= detail.image %>" alt="<%= detail.make %> <%= detail.model %>">
+  </div>
+  <div class="details">
+    <h2> <%- detail.make + ' ' + detail.model %></h2>
+    <p><span>Price: </span> <%- detail.price %></p>
+    <p><span>Description: </span> <%- detail.description %></p>
+    <p><span>Color: </span> <%- detail.color %></p>
+    <p><span>Miles: </span> <%- detail.miles %></p>
+  </div>
+</div>
