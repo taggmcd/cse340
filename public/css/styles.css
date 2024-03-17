@@ -179,6 +179,32 @@ h2 {
   min-height: 300px;
 }
 
+#inv-display {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0;
+  list-style-type: none;
+}
+
+#inv-display li {
+  border-radius: 10px;
+  border: 2px solid var(--accent2-color);
+  text-align: center;
+}
+
+#inv-display li div {
+  height: 150px;
+}
+
+#inv-display li img {
+  width: 100%;
+  border-radius: 10px;
+}
+
 .detail-card {
   display: flex;
   flex-direction: column;
@@ -239,17 +265,14 @@ h2 {
     flex-direction: row;
   }
 
+  #inv-display {
+    flex-direction: row;
+  }
+
   .detail-card {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: var(--accent1-color);
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
 }
