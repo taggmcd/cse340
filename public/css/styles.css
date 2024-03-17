@@ -191,6 +191,8 @@ h2 {
 }
 
 #inv-display li {
+  width: 250px;
+
   border-radius: 10px;
   border: 2px solid var(--accent2-color);
   text-align: center;
@@ -267,7 +269,9 @@ h2 {
 
   #inv-display {
     flex-direction: row;
+    flex-wrap: wrap
   }
+
 
   .detail-card {
     display: grid;
