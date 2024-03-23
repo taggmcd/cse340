@@ -259,7 +259,7 @@ form label input {
   border: solid 1px var(--accent1-color);
   border-radius: 4px;
   padding: .75rem;
-  color: var(--accent1-color);
+  color: var(--accent2-color);
   width: 100%;
   max-width: 20rem;
 }
