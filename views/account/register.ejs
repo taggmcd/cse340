@@ -2,11 +2,11 @@
 <div class="form-wrapper">
     <form action="/account/register" method="post">
         <label for="account_firstname">First Name:
-            <input type="text" id="account_firstname" name="account_firstname" id="account_firstname" required
+            <input type="text" id="account_firstname" name="account_firstname" required
                 value="<%= locals.account_firstname %>">
         </label>
         <label for="account_lastname">Last Name:
-            <input type="text" id="account_lastname" name="account_lastname" id="account_lastname" required
+            <input type="text" id="account_lastname" name="account_lastname" required
                 value="<%= locals.account_lastname %>">
         </label>
         <label for="account_email">Email Address:
@@ -15,6 +15,7 @@
         <label for="account_password">
             Password:
             <input type="password" id="account_password" name="account_password" required>
+            <span id="password-reveal">Show Password</span>
         </label>
         <div>
             <ul>
@@ -27,3 +28,4 @@
         <button class="btn" type="submit">Register Now</button>
     </form>
 </div>
+<script src="/js/script.js"></script>

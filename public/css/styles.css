@@ -274,8 +274,7 @@ form button {
   color: var(--accent1-color);
   border-radius: 1rem;
   padding: .75rem;
-  margin-top: .75rem;
-  margin-bottom: .75rem;
+  margin: .75rem auto;
   width: 100%;
   max-width: 20rem;
   cursor: pointer;
