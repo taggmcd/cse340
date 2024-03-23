@@ -1,0 +1,14 @@
+<h1><%- title %></h1>
+<div class="form-wrapper">
+    <form id="loginForm" action="/account/login" method="post">
+        <label for="account_email">Email Address:
+            <input type="email" id="account_email" name="account_email">
+        </label>
+        <label for="account_password">
+            Password:
+            <input type="password" id="account_password" name="account_password">
+        </label>
+        <button type="submit">Login Now</button>
+    </form>
+    <p>No Account? <a href="/account/register">Register now</a></p>
+</div>
