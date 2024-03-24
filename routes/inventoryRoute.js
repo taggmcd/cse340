@@ -15,7 +15,12 @@ router.post(
 );
 
 router.get("/create", utilities.handleErrors(invController.invCreate));
-router.post("/create", utilities.handleErrors(invController.invStore));
+router.post(
+  "/create",
+  inventoryValidate.inventoryRules(),
+  inventoryValidate.checkInventoryData,
+  utilities.handleErrors(invController.storeInventory)
+);
 
 router.get(
   "/type/:classificationId",
