@@ -147,7 +147,7 @@ invCont.storeInventory = async function (req, res) {
     nav = await utilities.getNav();
     req.flash("notice", `Congratulations, new inventory has been created.`);
     res.status(201).render("inventory/management", {
-      title: "Login",
+      title: "Inventory Managment",
       nav,
     });
   } else {
