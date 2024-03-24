@@ -31,7 +31,10 @@
             </label>
             <label for="inv_miles">Miles:
                 <input type="number" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles %>" min="0"
-                    max="1000">
+                    max="1000000">
+            </label>
+            <label>Description:
+                <textarea name="inv_description" id="inv_description" cols="30" rows="10"></textarea>
             </label>
             <button class="btn" type="submit">Add to Inventory</button>
         </form>

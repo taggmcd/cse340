@@ -1,5 +1,4 @@
 const invModel = require("../models/inventory-model");
-const Util = require("../utilities/");
 const utilities = require("../utilities/");
 
 const invCont = {};
@@ -87,9 +86,9 @@ invCont.typeCreate = async function (req, res, next) {
   });
 };
 
-/* ****************************************
- *  Process Registration
- * *************************************** */
+/*****************************************
+ *  Process Classification
+ **************************************** */
 invCont.storeClassification = async function (req, res) {
   let nav = await utilities.getNav();
   const { classification_name } = req.body;
@@ -110,6 +109,51 @@ invCont.storeClassification = async function (req, res) {
     req.flash("notice", "Sorry, creating the classification failed.");
     res.status(501).render("inventory/type-create", {
       title: "Create Classification",
+      nav,
+    });
+  }
+};
+
+/* ****************************************
+ *  Process Inventory
+ * *************************************** */
+invCont.storeInventory = async function (req, res) {
+  let nav = await utilities.getNav();
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+
+  const regResult = await invModel.createInventory(
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    "/images/vehicles/no-image.png",
+    "/images/vehicles/no-image-tn.png",
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+  );
+
+  if (regResult) {
+    nav = await utilities.getNav();
+    req.flash("notice", `Congratulations, new inventory has been created.`);
+    res.status(201).render("inventory/management", {
+      title: "Login",
+      nav,
+    });
+  } else {
+    req.flash("notice", "Sorry, creating the inventory failed.");
+    res.status(501).render("inventory/create", {
+      title: "Create Inventory",
       nav,
     });
   }

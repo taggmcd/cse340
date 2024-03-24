@@ -254,6 +254,7 @@ form label {
 }
 
 form label input,
+form label textarea,
 form label select {
   display: block;
   font-size: 1rem;
@@ -282,12 +283,14 @@ form button {
 }
 
 form label input:required,
-form label select:required {
+form label select:required,
+form label textarea:required {
   border-left: var(--required-color) solid 6px;
 }
 
 form label input:required:valid,
-form label select:required:valid {
+form label select:required:valid,
+form label textarea:required:valid {
   border-left: var(--valid-color) solid 6px;
 }
 
