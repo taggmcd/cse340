@@ -239,10 +239,11 @@ h2 {
   margin: 0 auto;
 }
 
+.form-wrapper div {
+  margin: 0 auto;
+}
+
 .form-wrapper form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: var(--primary-color);
   border-radius: 10px;
 }
@@ -250,10 +251,10 @@ h2 {
 form label {
   display: block;
   padding-top: 1rem;
-  color: var(--accent2-color);
 }
 
-form label input {
+form label input,
+form label select {
   display: block;
   font-size: 1rem;
   border: solid 1px var(--accent1-color);
@@ -280,11 +281,13 @@ form button {
   cursor: pointer;
 }
 
-form label input:required {
+form label input:required,
+form label select:required {
   border-left: var(--required-color) solid 6px;
 }
 
-form label input:required:valid {
+form label input:required:valid,
+form label select:required:valid {
   border-left: var(--valid-color) solid 6px;
 }
 

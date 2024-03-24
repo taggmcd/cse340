@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const Util = require("../utilities/");
 const utilities = require("../utilities/");
 
 const invCont = {};
@@ -45,6 +46,73 @@ invCont.detail = async function (req, res, next) {
     nav,
     detail,
   });
+};
+
+/* ***************************
+ *  Manage inventory view
+ * ************************** */
+invCont.manage = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("./inventory/management", {
+    title: "Inventory Managment",
+    nav,
+    errors: null,
+  });
+};
+
+/* ***************************
+ *  Create inventory view
+ * ************************** */
+invCont.invCreate = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  let classifications = await utilities.buildClassificationList();
+  console.log(classifications);
+  res.render("./inventory/create", {
+    title: "Add a vehicle",
+    nav,
+    errors: null,
+    classifications,
+  });
+};
+
+/* ***************************
+ *  Create classification view
+ * ************************** */
+invCont.typeCreate = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("./inventory/create-type", {
+    title: "Add a vehicle type",
+    nav,
+    errors: null,
+  });
+};
+
+/* ****************************************
+ *  Process Registration
+ * *************************************** */
+invCont.storeClassification = async function (req, res) {
+  let nav = await utilities.getNav();
+  const { classification_name } = req.body;
+
+  const regResult = await invModel.createClassification(classification_name);
+
+  if (regResult) {
+    nav = await utilities.getNav();
+    req.flash(
+      "notice",
+      `Congratulations, ${classification_name} has been created.`
+    );
+    res.status(201).render("inventory/management", {
+      title: "Login",
+      nav,
+    });
+  } else {
+    req.flash("notice", "Sorry, creating the classification failed.");
+    res.status(501).render("inventory/type-create", {
+      title: "Create Classification",
+      nav,
+    });
+  }
 };
 
 module.exports = invCont;
