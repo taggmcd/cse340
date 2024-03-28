@@ -144,8 +144,8 @@ Util.checkLogin = (req, res, next) => {
  * ************************************ */
 Util.checkAdmin = (req, res, next) => {
   if (
-    res.locals.account_type === "admin" ||
-    res.locals.account_type === "employee"
+    res.locals.accountData.account_type === "Admin" ||
+    res.locals.accountData.account_type === "Employee"
   ) {
     next();
   } else {
