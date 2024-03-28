@@ -2,6 +2,7 @@
  * This server.js file is the primary file of the
  * application. It is used to control the project.
  *******************************************/
+
 /* ***********************
  * Require Statements
  *************************/
@@ -14,6 +15,7 @@ const pool = require("./database/");
 const env = require("dotenv").config();
 const app = express();
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
@@ -42,8 +44,14 @@ app.use(function (req, res, next) {
   next();
 });
 
+// Body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
+// Cookie Parser
+app.use(cookieParser());
+
+app.use(utilities.checkJWTToken);
 
 /* ***********************
  * View Engine and Templates
