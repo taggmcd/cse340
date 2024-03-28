@@ -26,11 +26,10 @@ async function registerAccount(
 /***********************
  *   Check for existing email
  ***********************/
-async function checkExistingEmail(account_email, old_email = null) {
+async function checkExistingEmail(account_email) {
   try {
-    const sql =
-      "SELECT * FROM account WHERE account_email = $1 AND account_email != $2";
-    const email = await pool.query(sql, [account_email, old_email]);
+    const sql = "SELECT * FROM account WHERE account_email = $1";
+    const email = await pool.query(sql, [account_email]);
     return email.rowCount;
   } catch (error) {
     return error.message;
@@ -95,10 +94,11 @@ async function updateAccount(
  *  Update Password
  * ************************** */
 async function updatePassword(account_id, account_password) {
+  console.log(account_id, account_password);
   try {
     const sql =
-      "UPDATE public.account SET account_password = $1 WHERE account_id = $2 RETURNING *";
-    const data = await pool.query(sql, [account_password, account_id]);
+      "UPDATE public.account SET account_password = $2 WHERE account_id = $1 RETURNING *";
+    const data = await pool.query(sql, [account_id, account_password]);
     return data.rows[0];
   } catch (error) {
     console.error("model error: " + error);

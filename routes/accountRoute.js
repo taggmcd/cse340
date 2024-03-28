@@ -25,7 +25,7 @@ router.post(
   "/register",
   regValidate.registationRules(),
   regValidate.checkRegData,
-  utilities.handleErrors(accountController.editAccount)
+  utilities.handleErrors(accountController.registerAccount)
 );
 
 router.get(
@@ -40,5 +40,15 @@ router.post(
   regValidate.checkUpdateData,
   utilities.handleErrors(accountController.updateAccount)
 );
+
+router.post(
+  "/edit-password",
+  utilities.checkLogin,
+  regValidate.passwordRules(),
+  regValidate.checkPasswordData,
+  utilities.handleErrors(accountController.updatePassword)
+);
+
+router.get("/logout", accountController.logout);
 
 module.exports = router;

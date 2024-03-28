@@ -18,6 +18,7 @@ async function index(req, res) {
     nav,
     errors: null,
     account_firstname: accountData.account_firstname,
+    account_type: accountData.account_type,
   });
 }
 
@@ -175,12 +176,7 @@ async function updateAccount(req, res) {
       "notice",
       `Congratulations ${account_firstname}, your account has been updated.`
     );
-    res.status(201).render("account", {
-      title: "Account",
-      nav,
-      account_firstname,
-      errors: null,
-    });
+    res.redirect("/account");
   } else {
     req.flash("notice", "Sorry, the update failed.");
     res.status(501).render("account/edit", {
@@ -191,6 +187,38 @@ async function updateAccount(req, res) {
   }
 }
 
+/* ****************************************
+ *  Process Password Update
+ * *************************************** */
+async function updatePassword(req, res) {
+  let nav = await utilities.getNav();
+  const { account_id, account_password } = req.body;
+  let hashedPassword;
+  hashedPassword = await bcrypt.hashSync(account_password, 10);
+  const regResult = await accountModel.updatePassword(
+    account_id,
+    hashedPassword
+  );
+
+  if (regResult) {
+    req.flash("notice", `Congratulations, your password has been updated.`);
+    res.redirect("/account");
+  } else {
+    req.flash("notice", "Sorry, the update failed.");
+    res.status(501).render("account/edit", {
+      title: "Account Information",
+      nav,
+      errors: null,
+      account_id,
+    });
+  }
+}
+
+async function logout(req, res) {
+  res.clearCookie("jwt");
+  res.redirect("/account/login");
+}
+
 module.exports = {
   buildLogin,
   login,
@@ -199,4 +227,6 @@ module.exports = {
   index,
   edit,
   updateAccount,
+  updatePassword,
+  logout,
 };
