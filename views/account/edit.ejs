@@ -1,4 +1,4 @@
-<h1>Register</h1>
+<h1>Account</h1>
 <div class="form-wrapper">
     <h2>Update Account</h2>
     <% if (errors) { %>
@@ -8,6 +8,7 @@
         <%  }) %>
     </ul>
     <% } %>
+    <span><%- messages() %></span>
     <form action="/account/edit" method="post">
         <label for="account_firstname">First Name:
             <input type="text" id="account_firstname" name="account_firstname" required
@@ -41,7 +42,7 @@
                 <li>contain at least 1 special character</li>
             </ul>
         </div>
-        <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+        <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
         <button class="btn" type="submit">Save Changes</button>
     </form>
 </div>

@@ -160,11 +160,15 @@ validate.updateRules = () => {
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
       .withMessage("A valid email is required.")
-      .custom(async (account_email) => {
+      .custom(async (account_email, { req, res }) => {
+        const currentEmail = await accountModel.getAccountById(
+          req.body.account_id
+        );
+        console.log(currentEmail);
         const emailExists = await accountModel.checkExistingEmail(
           account_email
         );
-        if (emailExists) {
+        if (emailExists && currentEmail.account_email !== account_email) {
           throw new Error("Email exists. Please log in or use different email");
         }
       }),
@@ -213,6 +217,26 @@ validate.passwordRules = () => {
       })
       .withMessage("Password does not meet requirements."),
   ];
+};
+
+/* ******************************
+ * Check data and return errors or continue to account update
+ * ***************************** */
+validate.checkPasswordData = async (req, res, next) => {
+  const { account_id, account_password } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("account/edit", {
+      errors,
+      title: "Edit Account",
+      nav,
+      account_id,
+    });
+    return;
+  }
+  next();
 };
 
 module.exports = validate;

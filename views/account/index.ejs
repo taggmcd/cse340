@@ -9,9 +9,11 @@
 </ul>
 <% } %>
 <p>Welcome to your account page.</p>
-<p>Here you can view your account details, update your information, and change your password.</p>
-<p>Click on the links below to get started.</p>
-<ul>
-    <li><a href="/account/edit/">Update Account Information</a></li>
-</ul>
-<p>Need to log out? <a href="/account/logout">Click here</a></p>
+
+<% if (account_type === "Employee" || account_type === "Admin") { %>
+<h3>Manage Inventoy</h3>
+<a href="/inv/manage" title="Click to log out">Inventory</a>
+<% } %>
+
+<h3>Manage Account</h3>
+<a href="/account/edit/">Update Account Information</a>

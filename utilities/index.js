@@ -144,12 +144,12 @@ Util.checkLogin = (req, res, next) => {
  * ************************************ */
 Util.checkAdmin = (req, res, next) => {
   if (
-    res.locals.accountData.account_type === "admin" ||
-    res.locals.accountData.account_type === "employee"
+    res.locals.account_type === "admin" ||
+    res.locals.account_type === "employee"
   ) {
     next();
   } else {
-    req.flash("notice", "You do not have permission to view this page.");
+    // req.flash("notice", "You do not have permission to view this page.");
     return res.redirect("/");
   }
 };
