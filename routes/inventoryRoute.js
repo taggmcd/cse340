@@ -21,6 +21,27 @@ router.post(
   inventoryValidate.checkInventoryData,
   utilities.handleErrors(invController.storeInventory)
 );
+router.get(
+  "/edit/:invId",
+  utilities.handleErrors(invController.editInventoryView)
+);
+router.post(
+  "/edit",
+  inventoryValidate.inventoryRules(),
+  inventoryValidate.checkUpdateData,
+  invController.updateInventory
+);
+
+router.get(
+  "/delete/:invId",
+  utilities.handleErrors(invController.deleteInventoryView)
+);
+router.post("/delete", invController.deleteInventory);
+
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+);
 
 router.get(
   "/type/:classificationId",

@@ -9,10 +9,15 @@ require("dotenv").config();
  * *************************************** */
 async function index(req, res) {
   let nav = await utilities.getNav();
+  let accountData = await accountModel.getAccountById(
+    res.locals.accountData.account_id
+  );
+
   res.render("./account/index", {
     title: "Account Home",
     nav,
     errors: null,
+    account_firstname: accountData.account_firstname,
   });
 }
 
@@ -135,4 +140,63 @@ async function registerAccount(req, res) {
   }
 }
 
-module.exports = { buildLogin, login, buildRegister, registerAccount, index };
+/* ****************************************
+ *  Deliver Update view
+ * *************************************** */
+async function edit(req, res, next) {
+  let nav = await utilities.getNav();
+  let account_id = res.locals.accountData.account_id;
+  let accountData = await accountModel.getAccountById(account_id);
+  res.render("./account/edit", {
+    title: "Account Information",
+    nav,
+    errors: null,
+    accountData,
+  });
+}
+
+/* ****************************************
+ *  Process Update
+ * *************************************** */
+async function updateAccount(req, res) {
+  let nav = await utilities.getNav();
+  const { account_firstname, account_lastname, account_email, account_id } =
+    req.body;
+
+  const regResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  );
+
+  if (regResult) {
+    req.flash(
+      "notice",
+      `Congratulations ${account_firstname}, your account has been updated.`
+    );
+    res.status(201).render("account", {
+      title: "Account",
+      nav,
+      account_firstname,
+      errors: null,
+    });
+  } else {
+    req.flash("notice", "Sorry, the update failed.");
+    res.status(501).render("account/edit", {
+      title: "Account Information",
+      nav,
+      errors: null,
+    });
+  }
+}
+
+module.exports = {
+  buildLogin,
+  login,
+  buildRegister,
+  registerAccount,
+  index,
+  edit,
+  updateAccount,
+};

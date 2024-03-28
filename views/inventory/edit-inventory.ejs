@@ -8,7 +8,7 @@
     </ul>
     <% } %>
     <div>
-        <form action="/inv/create" method="post">
+        <form id="updateForm" action="/inv/edit" method="post">
             <label for="inv_make">Make:
                 <input type="text" id="inv_make" name="inv_make" required value="<%= locals.inv_make %>">
             </label>
@@ -37,7 +37,9 @@
                 <textarea name="inv_description" id="inv_description" cols="30"
                     rows="10"><%= locals.inv_description %></textarea>
             </label>
-            <button class="btn" type="submit">Add to Inventory</button>
+            <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
+            <button class="btn" type="submit" disabled>Update Inventory</button>
         </form>
     </div>
 </div>
+<script src="../../js/inv-update.js"></script>

@@ -25,7 +25,20 @@ router.post(
   "/register",
   regValidate.registationRules(),
   regValidate.checkRegData,
-  utilities.handleErrors(accountController.registerAccount)
+  utilities.handleErrors(accountController.editAccount)
+);
+
+router.get(
+  "/edit",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.edit)
+);
+router.post(
+  "/edit",
+  utilities.checkLogin,
+  regValidate.updateRules(),
+  regValidate.checkUpdateData,
+  utilities.handleErrors(accountController.updateAccount)
 );
 
 module.exports = router;

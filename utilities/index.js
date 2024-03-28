@@ -139,4 +139,19 @@ Util.checkLogin = (req, res, next) => {
   }
 };
 
+/* ****************************************
+ *  Check Admin
+ * ************************************ */
+Util.checkAdmin = (req, res, next) => {
+  if (
+    res.locals.accountData.account_type === "admin" ||
+    res.locals.accountData.account_type === "employee"
+  ) {
+    next();
+  } else {
+    req.flash("notice", "You do not have permission to view this page.");
+    return res.redirect("/");
+  }
+};
+
 module.exports = Util;
