@@ -20,6 +20,7 @@ const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
+const favoriteRoute = require("./routes/favoriteRoute");
 
 /* ***********************
  * Middleware
@@ -76,6 +77,9 @@ app.use("/inv", inventoryRoute);
 
 // Account
 app.use("/account", accountRoute);
+
+// Favorite
+app.use("/favorite", favoriteRoute);
 
 // 404
 app.use(async (req, res, next) => {

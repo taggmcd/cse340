@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const favoriteModel = require("../models/favorite-model");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const Util = {};
@@ -152,6 +153,12 @@ Util.checkAdmin = (req, res, next) => {
     // req.flash("notice", "You do not have permission to view this page.");
     return res.redirect("/");
   }
+};
+
+// Check if it is a fovorite already
+Util.checkFavorite = async function (account_id, inventory_id) {
+  const result = await favoriteModel.checkFavorite(account_id, inventory_id);
+  return result.rowCount;
 };
 
 module.exports = Util;
