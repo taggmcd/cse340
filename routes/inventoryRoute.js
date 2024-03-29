@@ -53,6 +53,7 @@ router.get(
   utilities.checkAdmin,
   utilities.handleErrors(invController.deleteInventoryView)
 );
+
 router.post("/delete", utilities.checkAdmin, invController.deleteInventory);
 
 router.get(

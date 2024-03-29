@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model");
+const Util = require("../utilities/");
 const utilities = require("../utilities/");
 
 const invCont = {};
@@ -26,6 +27,13 @@ invCont.detail = async function (req, res, next) {
   const inv_id = req.params.invId;
   const data = await invModel.getInventoryDetailById(inv_id);
   const detail = {};
+  let isFavorite;
+  if (res.locals.accountData.account_id) {
+    isFavorite = await Util.checkFavorite(
+      res.locals.accountData.account_id,
+      data.inv_id
+    );
+  }
   detail.make = data.inv_make;
   detail.model = data.inv_model;
   detail.price = new Intl.NumberFormat("en-US", {
@@ -38,11 +46,13 @@ invCont.detail = async function (req, res, next) {
   detail.description = data.inv_description;
   detail.thumbnail = data.inv_thumbnail;
   detail.image = data.inv_image;
-
+  detail.id = data.inv_id;
+  detail.isFavorite = isFavorite;
   const nav = await utilities.getNav();
   res.render("./inventory/detail", {
     title: " vehicles",
     nav,
+    errors: null,
     detail,
   });
 };

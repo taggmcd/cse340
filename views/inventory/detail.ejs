@@ -2,6 +2,14 @@
   <%- detail.make %>
   <%- detail.model %></h1>
 
+<% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <%  }) %>
+</ul>
+<% } %>
+<span><%- messages() %></span>
 
 <div class="detail-card">
   <div class="image">
@@ -13,5 +21,16 @@
     <p><span>Description: </span> <%- detail.description %></p>
     <p><span>Color: </span> <%- detail.color %></p>
     <p><span>Miles: </span> <%- detail.miles %></p>
+    <% if (!detail.isFavorite) { %>
+    <form action="/favorite/set" method="post">
+      <input type="hidden" name="inventory_id" value="<%= detail.id %>">
+      <button type="submit">Add to Favorites</button>
+    </form>
+    <% } else { %>
+    <form action="/favorite/remove" method="post">
+      <input type="hidden" name="inventory_id" value="<%= detail.id %>">
+      <button type="submit">Remove from Favorites</button>
+    </form>
+    <% } %>
   </div>
 </div>
